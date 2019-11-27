@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue之key问题相关</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 添加新名称 -->
+    <div>
+      <input type="text" v-model="uname">
+      <button @click="add">添加</button>
+    </div>
+    <ul>
+        <li v-for="item in list" :key="item.id">
+          <input type="checkbox">
+            编号：{{item.id}}---姓名：{{item.name}}
+        </li>
+    </ul>
+    <input type="text" @click="text">
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        list: [
+          {id: 0, name: '嬴政'},
+          {id: 1, name: '吕不韦'},
+          {id: 2, name: '马梓洋'},
+        ],
+        uname: ''
+      },
+      methods: {
+        add() {
+          let newuser = {id:this.list.length,name:this.uname}
+          this.list.push(newuser)
+          this.uname = ''
+        },
+        text(e) {
+          console.log(e.target.value)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
